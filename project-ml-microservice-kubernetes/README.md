@@ -51,27 +51,27 @@ source .devops/bin/activate
 * Run via kubectl
 
 ### Project Files and Details:
-app.py - python application file.
-Makefile - make file to be used to  setup project. Make sure make command installed. use scoop to install make in windows
-Dockerfile - Main docker file which contain container information
-requirement.txt - given as input to Makefile to install dependencies for running app.py.
-run_docker.sh,run_kubernetes.sh - shell script to run docker and kubernetes command.
-upload_docker.sh - shell script is used to upload the docker image creating using run_docker.sh.
-make_prediction.sh - its a prediction input script, execute once docker and kubernetes are running.
-.circleci/config.yml - circleCI configuration file to support devops deployment.
+1. app.py - python application file.
+2. Makefile - make file to be used to  setup project. Make sure make command installed. use scoop to install make in windows
+3. Dockerfile - Main docker file which contain container information
+4. requirement.txt - given as input to Makefile to install dependencies for running app.py.
+5. run_docker.sh,run_kubernetes.sh - shell script to run docker and kubernetes command.
+6. upload_docker.sh - shell script is used to upload the docker image creating using run_docker.sh.
+7. make_prediction.sh - its a prediction input script, execute once docker and kubernetes are running.
+8. .circleci/config.yml - circleCI configuration file to support devops deployment.
 
 ### Executing the scripts:
 Make sure  project environment is setup correctly
 
 Execute below commands to create virtual environment and activate it.
-python3 -m venv ~/.devops
-source  ~/.devops/bin/activate
-make install  - to install dependencies 
-make installdochadolint
-make init - This command should be error free which validate app.py and Dockerfile.
-installdochadolint 
- execute ./run_docker.sh - This will bring up docker image.
- execute ./make_prediction.sh to check if app.py is working and capture the output.
- execute ./upload_docker.sh to upload docker image to docker hub
- execute run_kubernetes.sh This command will create a pod.
- execute ./make_prediction.sh to check if app.py is working and capture the output.
+1. python3 -m venv ~/.devops
+2. source  ~/.devops/bin/activate
+3. make install  - to install dependencies 
+4. make installdochadolint
+5. make init - This command should be error free which validate app.py and Dockerfile.
+6. make installdochadolint 
+7. execute ./run_docker.sh - This will bring up docker image.
+8. execute ./make_prediction.sh to check if app.py is working and capture the output.
+9. execute ./upload_docker.sh to upload docker image to docker hub
+10. execute run_kubernetes.sh This command will create a pod.
+11. execute ./make_prediction.sh to check if app.py is working and capture the output.
