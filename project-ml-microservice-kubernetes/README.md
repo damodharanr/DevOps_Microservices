@@ -49,3 +49,29 @@ source .devops/bin/activate
 * Setup and Configure Kubernetes locally
 * Create Flask app in Container
 * Run via kubectl
+
+### Project Files and Details:
+app.py - python application file.
+Makefile - make file to be used to  setup project. Make sure make command installed. use scoop to install make in windows
+Dockerfile - Main docker file which contain container information
+requirement.txt - given as input to Makefile to install dependencies for running app.py.
+run_docker.sh,run_kubernetes.sh - shell script to run docker and kubernetes command.
+upload_docker.sh - shell script is used to upload the docker image creating using run_docker.sh.
+make_prediction.sh - its a prediction input script, execute once docker and kubernetes are running.
+.circleci/config.yml - circleCI configuration file to support devops deployment.
+
+### Executing the scripts:
+Make sure  project environment is setup correctly
+
+Execute below commands to create virtual environment and activate it.
+python3 -m venv ~/.devops
+source  ~/.devops/bin/activate
+make install  - to install dependencies 
+make installdochadolint
+make init - This command should be error free which validate app.py and Dockerfile.
+installdochadolint 
+ execute ./run_docker.sh - This will bring up docker image.
+ execute ./make_prediction.sh to check if app.py is working and capture the output.
+ execute ./upload_docker.sh to upload docker image to docker hub
+ execute run_kubernetes.sh This command will create a pod.
+ execute ./make_prediction.sh to check if app.py is working and capture the output.

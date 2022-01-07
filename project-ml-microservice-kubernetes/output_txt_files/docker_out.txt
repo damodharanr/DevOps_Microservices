@@ -1,17 +1,26 @@
-<paste log output from Docker prediction, here>
-Successfully tagged devopsapi:latest
-REPOSITORY                           TAG             IMAGE ID       CREATED          SIZE
-devopsapi                            latest          a186c0e50e9a   1 second ago     1.3GB
-damodharanr/udaycityproject4devops   latest          f5d48bc7f59f   32 minutes ago   1.3GB
-<none>                               <none>          af30ea8d794d   34 minutes ago   976MB
-lambci/lambda                        python3.8       094248252696   11 months ago    524MB
-lambci/lambda                        nodejs12.x      22a4ada8399c   11 months ago    390MB
-lambci/lambda                        nodejs10.x      db93be728e7b   11 months ago    385MB
-lambci/lambda                        python3.7       22b4b6fd9260   11 months ago    946MB
-lambci/lambda                        python3.6       177c85a10179   11 months ago    894MB
-lambci/lambda                        python2.7       d96a01fe4c80   11 months ago    763MB
-lambci/lambda                        nodejs8.10      5754fee26e6e   11 months ago    813MB
-python                               3.7.3-stretch   34a518642c76   2 years ago      929MB
+$ sh make_prediction.sh 
+Port: 8000
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+REPOSITORY                           TAG                                                     IMAGE ID       CREATED          SIZE
+devopsapi                            latest                                                  94526ccab570   10 seconds ago   1.27GB
+<none>                               <none>                                                  7603f41cc55c   13 minutes ago   1.27GB
+<none>                               <none>                                                  a186c0e50e9a   7 hours ago      1.3GB
+docker/desktop-kubernetes            kubernetes-v1.22.4-cni-v0.8.5-critools-v1.17.0-debian   493a106d3678   7 weeks ago      294MB
+k8s.gcr.io/kube-apiserver            v1.22.4                                                 8a5cc299272d   7 weeks ago      128MB
+k8s.gcr.io/kube-controller-manager   v1.22.4                                                 0ce02f92d3e4   7 weeks ago      122MB
+k8s.gcr.io/kube-scheduler            v1.22.4                                                 721ba97f54a6   7 weeks ago      52.7MB
+k8s.gcr.io/kube-proxy                v1.22.4                                                 edeff87e4802   7 weeks ago      104MB
+k8s.gcr.io/etcd                      3.5.0-0                                                 004811815584   6 months ago     295MB
+k8s.gcr.io/coredns/coredns           v1.8.4                                                  8d147537fb7d   7 months ago     47.6MB
+docker/desktop-vpnkit-controller     v2.0                                                    8c2c38aa676e   8 months ago     21MB
+docker/desktop-storage-provisioner   v2.0                                                    99f89471f470   8 months ago     41.9MB
+k8s.gcr.io/pause                     3.5                                                     ed210e3e4a5b   9 months ago     683kB
  * Serving Flask app "app" (lazy loading)
  * Environment: production
    WARNING: Do not use the development server in a production environment.
@@ -20,14 +29,17 @@ python                               3.7.3-stretch   34a518642c76   2 years ago 
  * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
  * Restarting with stat
  * Debugger is active!
- * Debugger PIN: 283-498-587
-
-[2022-01-07 10:27:59,984] INFO in app: JSON payload: 
+ * Debugger PIN: 606-775-046
+[2022-01-07 16:57:38,796] INFO in app: JSON payload: 
 {'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
-[2022-01-07 10:28:00,003] INFO in app: Inference payload DataFrame: 
+[2022-01-07 16:57:38,821] INFO in app: Inference payload DataFrame:
    CHAS     RM    TAX  PTRATIO      B  LSTAT
 0     0  6.575  296.0     15.3  396.9   4.98
-[2022-01-07 10:28:00,016] INFO in app: Scaling Payload: 
+[2022-01-07 16:57:38,847] INFO in app: Scaling Payload:
    CHAS     RM    TAX  PTRATIO      B  LSTAT
 0     0  6.575  296.0     15.3  396.9   4.98
-172.17.0.1 - - [07/Jan/2022 10:28:00] "POST /predict HTTP/1.1" 200 -
+[2022-01-07 16:57:38,856] INFO in app: scaled payload:
+[[0. 0. 0. 0. 0. 0.]]
+[2022-01-07 16:57:38,857] INFO in app: output payload:
+[20.35373177134412]
+172.17.0.1 - - [07/Jan/2022 16:57:38] "POST /predict HTTP/1.1" 200 -
