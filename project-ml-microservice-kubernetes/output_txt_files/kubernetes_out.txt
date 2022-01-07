@@ -1,1 +1,73 @@
 <paste log output from Kubernetes-mediated prediction, here>
+Damodharan@DESKTOP-NB1ORA4 MINGW64 /c/Damodharan/udacity/project4/repo/DevOps_Microservices/project-ml-microservice-kubernetes (master)
+$ sh run_kubernetes.sh
+Docker ID and Image: damodharanr/udaycityproject4devops
+Error from server (AlreadyExists): pods "devopsapi" already exists
+NAME        READY   STATUS    RESTARTS   AGE
+devopsapi   1/1     Running   0          3m15s
+Forwarding from 127.0.0.1:8000 -> 80
+Handling connection for 8000
+Handling connection for 8000
+Damodharan@DESKTOP-NB1ORA4 MINGW64 /c/Damodharan/udacity/project4/repo/DevOps_Microservices/project-ml-microservice-kubernetes (master)
+$ docker image ls
+REPOSITORY                           TAG                                                     IMAGE ID       CREATED         SIZE
+devopsapi                            latest                                                  8efbb8e31449   9 minutes ago   1.32GB
+damodharanr/udaycityproject4devops   latest                                                  a186c0e50e9a   2 hours ago     1.3GB
+docker/desktop-kubernetes            kubernetes-v1.22.4-cni-v0.8.5-critools-v1.17.0-debian   493a106d3678   7 weeks ago     294MB
+k8s.gcr.io/kube-apiserver            v1.22.4                                                 8a5cc299272d   7 weeks ago     128MB
+k8s.gcr.io/kube-controller-manager   v1.22.4                                                 0ce02f92d3e4   7 weeks ago     122MB
+k8s.gcr.io/kube-scheduler            v1.22.4                                                 721ba97f54a6   7 weeks ago     52.7MB
+k8s.gcr.io/kube-proxy                v1.22.4                                                 edeff87e4802   7 weeks ago     104MB
+k8s.gcr.io/etcd                      3.5.0-0                                                 004811815584   6 months ago    295MB
+k8s.gcr.io/coredns/coredns           v1.8.4                                                  8d147537fb7d   7 months ago    47.6MB
+docker/desktop-vpnkit-controller     v2.0                                                    8c2c38aa676e   8 months ago    21MB
+docker/desktop-storage-provisioner   v2.0                                                    99f89471f470   8 months ago    41.9MB
+k8s.gcr.io/pause                     3.5                                                     ed210e3e4a5b   9 months ago    683kB
+
+Damodharan@DESKTOP-NB1ORA4 MINGW64 /c/Damodharan/udacity/project4/repo/DevOps_Microservices/project-ml-microservice-kubernetes (master)
+$ sh make_prediction.sh 
+Port: 8000
+{
+  "prediction": [
+    20.35373177134412
+  ]
+}
+
+Damodharan@DESKTOP-NB1ORA4 MINGW64 /c/Damodharan/udacity/project4/repo/DevOps_Microservices/project-ml-microservice-kubernetes (master)
+$ kubectl.exe get pods
+NAME        READY   STATUS    RESTARTS   AGE
+devopsapi   1/1     Running   0          8m11s
+
+Damodharan@DESKTOP-NB1ORA4 MINGW64 /c/Damodharan/udacity/project4/repo/DevOps_Microservices/project-ml-microservice-kubernetes (master)
+$ kubectl logs devopsapi
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 561-012-287
+[2022-01-07 11:46:37,786] INFO in app: JSON payload:
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2022-01-07 11:46:37,808] INFO in app: Inference payload DataFrame:
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2022-01-07 11:46:37,818] INFO in app: Scaling Payload:
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+127.0.0.1 - - [07/Jan/2022 11:46:37] "POST /predict HTTP/1.1" 200 -
+127.0.0.1 - - [07/Jan/2022 11:47:30] "GET / HTTP/1.1" 200 -
+[2022-01-07 11:50:47,795] INFO in app: JSON payload:
+{'CHAS': {'0': 0}, 'RM': {'0': 6.575}, 'TAX': {'0': 296.0}, 'PTRATIO': {'0': 15.3}, 'B': {'0': 396.9}, 'LSTAT': {'0': 4.98}}
+[2022-01-07 11:50:47,811] INFO in app: Inference payload DataFrame:
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+[2022-01-07 11:50:47,821] INFO in app: Scaling Payload:
+   CHAS     RM    TAX  PTRATIO      B  LSTAT
+0     0  6.575  296.0     15.3  396.9   4.98
+127.0.0.1 - - [07/Jan/2022 11:50:47] "POST /predict HTTP/1.1" 200 -
+
+Damodharan@DESKTOP-NB1ORA4 MINGW64 /c/Damodharan/udacity/project4/repo/DevOps_Microservices/project-ml-microservice-kubernetes (master)
+$
